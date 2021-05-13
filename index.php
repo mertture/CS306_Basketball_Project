@@ -16,12 +16,9 @@ Here are the operations you can do in our application:
 <br>
 <br>
 <br>
-<a href="insertion.php"> Insertion</a> &nbsp;&nbsp; <a href= "deletion.php"> Deletion</a> &nbsp;&nbsp; <a href="selection.php"> Selection</a>
+<a href="insertion.php">Insert</a> &nbsp;&nbsp; 
+<a href="display_table.php">View and Delete</a>
 </div>
-
-
-
-
     
 </body>
 </html>
