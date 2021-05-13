@@ -139,8 +139,7 @@
                 else {
                     $fieldinfo = $result -> fetch_fields();
                     
-                    echo '<form action="display_table.php" method="POST"><table> ';
-                    echo '<input name="table_name" value="'.$table_name.'" hidden></input>';
+                    echo '<table> ';
                     echo "<tr>";
                     foreach ($fieldinfo as $val) {
                         echo "<td> ".$val -> name." </td>";
@@ -151,13 +150,13 @@
                         foreach ($row as $key => $value) {
                             echo "<td>".$value."</td>";
                         }
-                        echo "<td><button name=\"delete\" value=".">X</button>";
+                        echo '<td><form action="display_table.php" method="POST"><input name="table_name" value="'.$table_name.'" hidden></input><button name="delete" value=".">X</button>';
                         foreach ($key_columns as $key => $value) {
                             echo '<input name="delete_id['.$value.']" value="'.$row[$value].'" hidden></input>';
                         }
-                        echo "</td></tr>";
+                        echo "</form></td></tr>";
                     }
-                    echo "</table></form>";
+                    echo "</table>";
                 }
             }
         ?>
