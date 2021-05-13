@@ -90,7 +90,7 @@
                     <form action="display_table.php" method="POST">
                         Select a table:
                         <select name="table_name" onchange="this.form.submit()">
-                            <option value="" disabled selected>--select--</option>';
+                            <option value="" disabled selected><?php if (isset($_POST['table_name'])) {echo $_POST['table_name'];} else { echo 'Select';}?></option>
                             <?php
                                 if($result) {
                                     while($table = mysqli_fetch_assoc($result)) { 
@@ -115,9 +115,12 @@
                     $ids = $_POST['delete_id'];
                     $sql_statement = "DELETE FROM ".$table_name." WHERE ";
                     foreach ($ids as $key => $value) {
-                        $sql_statement = $sql_statement.$key."=".$value." ";
+                        $sql_statement = $sql_statement.$key."=".$value." AND ";
                     }
+                    $sql_statement = substr($sql_statement, 0, -4);
+                    
                     $result = mysqli_query($db, $sql_statement);
+                    
                 }
 
                 $sql_statement = "SHOW KEYS FROM ".$table_name." WHERE Key_name = 'PRIMARY'";
