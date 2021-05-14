@@ -1,10 +1,6 @@
 <?php
 
-$db = mysqli_connect('localhost', 'root', '', 'cs306_basketball_project');
-
-if ($db->connect_errno > 0) {
-    die('Unable to connect to database [' . $db->connect_error. ']');
-}
+include "config.php";
 
 // players
 if (isset($_POST['player_id']) and isset($_POST['f_name']) and isset($_POST['l_name']) and isset($_POST['birth_date']) and isset($_POST['height'])) {
@@ -216,4 +212,8 @@ else {
     echo "The form is not set yet.";
 }
 
+?>
+
+<?php 
+    //header("Location: insertion.php"); 
 ?>
