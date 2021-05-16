@@ -92,7 +92,7 @@
     </head>
     <body align="center">
         </br> </br>
-
+        <h1>Filter</h1>
         <a href="index.php"> Go to the main page</a>
 
         <?php

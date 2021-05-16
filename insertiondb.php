@@ -215,5 +215,5 @@ else {
 ?>
 
 <?php 
-    //header("Location: insertion.php"); 
+    header("Location: insertion.php"); 
 ?>

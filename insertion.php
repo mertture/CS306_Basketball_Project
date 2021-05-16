@@ -97,7 +97,7 @@
 <div align="center">
     <b> Welcome to Basketball League Database Application </b>
     <br> <br>
-    Fill the information to insert into Players table.
+    Fill the information to insert into tables.
     <br><br><br>
     <a href="index.php"> Go to the main page</a> <br><br>
 

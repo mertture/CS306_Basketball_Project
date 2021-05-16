@@ -72,7 +72,7 @@
     </head>
     <body align="center">
         </br> </br>
-
+        <h1> Deletion </h1>
         <a href="index.php"> Go to the main page</a>
 
         <?php
@@ -84,7 +84,7 @@
         ?>
             <div class = "wrapper">
                 <div class = "menu">
-                    <form action="display_table.php" method="POST">
+                    <form action="deletion.php" method="POST">
                         Select a table:
                         <select name="table_name" onchange="this.form.submit()">
                             <option value="" disabled selected><?php if (isset($_POST['table_name'])) {echo $_POST['table_name'];} else { echo 'Select';}?></option>
@@ -150,7 +150,7 @@
                         foreach ($row as $key => $value) {
                             echo "<td>".$value."</td>";
                         }
-                        echo '<td><form action="display_table.php" method="POST"><input name="table_name" value="'.$table_name.'" hidden></input><button name="delete" value=".">X</button>';
+                        echo '<td><form action="deletion.php" method="POST"><input name="table_name" value="'.$table_name.'" hidden></input><button name="delete" value=".">X</button>';
                         foreach ($key_columns as $key => $value) {
                             echo '<input name="delete_id['.$value.']" value="'.$row[$value].'" hidden></input>';
                         }

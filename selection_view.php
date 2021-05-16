@@ -13,6 +13,63 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style>
+        .wrapper {
+            justify-content: center;
+            padding: 35px 0;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+
+        select {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            border: none;
+            border-radius: 8px;
+            border: 2px solid #3f51b5;
+            box-shadow: 0 15px 15px #efefef;
+            appearance: none;
+            background: #e8eaf6;
+            background-position: 95% 55%;
+            background-size: 22px;
+        }
+
+        .content {
+            margin: 50px 0;
+        }
+        .content  .data {
+            padding: 25px;
+            background-color: #fff;
+            border: 2px solid #8bc34a;
+            border-radius: 8px;
+            
+        }
+        
+        .content p{
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid gainsboro;
+        }
+        .content p:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        } 
+         .content p b {
+            font-weight: 700;
+        }
+        .content p span {
+            float: right;
+            font-weight: normal;
+        }
+
+</style>
+
+
 
 </head>
 
@@ -21,7 +78,7 @@
     <div class="">
 
     <!-- TITLE -->
-      <h1 class="">SELECTION </h1>
+      <h1 class="">Selection </h1>
 
 
       <!-- MAIN MENU -->
