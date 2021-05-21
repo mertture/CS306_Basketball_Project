@@ -52,6 +52,7 @@ hr.section-title {
   padding-bottom :8px;
   text-align:center;
   font-weight: bold;
+  font-size: 14.5px;
 }
 
 td > a:first-child {
@@ -87,7 +88,7 @@ focus-within {
       <ul style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
         <li><a class="active" href="#home">Home</a></li>
         <li><a href="#news">Teams</a></li>
-        <li><a href="#contact">Players</a></li>
+        <li><a href="players.php">Players</a></li>
         <li><a href="#about">Games</a></li>
       </ul>
 
@@ -109,7 +110,7 @@ focus-within {
         $result = mysqli_query($db, $sql_statement);
         $fieldinfo = $result -> fetch_fields();
                     
-        echo '<table style="width:' .(count($fieldinfo) * 9).'vw"> ';
+        echo '<table class = "table-striped" style="width:' .(count($fieldinfo) * 10).'vw"> ';
         echo "<thead id ='teams_h_id'>";
         foreach ($fieldinfo as $val) {
           if ($val->name != "tid") {
