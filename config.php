@@ -16,7 +16,13 @@ $attributes = [
     "s_year" => "Season",
     "name" => "Team",
     "total_scored" => "Scored Points",
-    "standing" => "Standing"
+    "standing" => "Standing",
+    "f_name" => "Fist Name",
+    "l_name" => "Last Name",
+    "birth_date" => "Birth Day",
+    "height" => "Height",
+
+
 ];
 
 
