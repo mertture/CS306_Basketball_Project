@@ -2,6 +2,7 @@
 <html>
     <head>
         <title></title>
+        <link rel="stylesheet" href="styles/selection_view.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    
         <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -28,6 +29,14 @@
     </head>
 
     <body>
+    <ul style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
+        <li><a class="active" href="index.php">Home</a></li>
+        <li><a href="#news">Teams</a></li>
+        <li><a href="players.php">Players</a></li>
+        <li><a href="games.php">Games</a></li>
+      </ul>
+
+
         <?php
             include "config.php";
             $tables = "SELECT P.player_id, P.f_name, P.l_name, P.birth_date, P.height, T.name, PF.start_date, PF.end_date 
@@ -46,7 +55,7 @@
             <div class="row p-2 title">
 
                 <div class="col-12 mt-2">
-                    <h1 class="custom-font-bold text-center mb-0">
+                    <h1 class="custom-font-bold text-center mb-0" style = "color: black;">
                         PLAYERS                    
                     </h1>
                     <hr class="section-title">

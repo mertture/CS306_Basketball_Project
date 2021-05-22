@@ -3,9 +3,18 @@
         <title>All Matches</title>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    
-
+        <link rel="stylesheet" href="styles/selection_view.css">
     </head>
     <body>
+
+
+        <ul style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
+            <li><a class="active" href="index.php">Home</a></li>
+            <li><a href="#news">Teams</a></li>
+            <li><a href="players.php">Players</a></li>
+            <li><a href="games.php">Games</a></li>
+        </ul>
+
         <?php
             include "config.php";   
         ?>
@@ -14,7 +23,7 @@
 
             <div class="row p-2 title">
                 <div class="col-12 mt-2">
-                    <h1 class="custom-font-bold text-center mb-0">
+                    <h1 class="custom-font-bold text-center mb-0" style = "color:black;">
                         GAMES                    
                     </h1>
                     <hr class="section-title">
@@ -107,14 +116,18 @@
                 <thead>
                     <tr>
                     <?php
+                    if(isset($fieldinfo)) {
                         foreach ($fieldinfo as $val) {
-                            echo "<th scope='col'>".$attributes[$val -> name]." </td>";
+                            echo "<th scope
+                            ='col'>".$attributes[$val -> name]." </td>";
                         }
+                    }
                     ?>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
+                    if($result) {
                         while ($row = mysqli_fetch_assoc($result)) { 
                             echo "<tr>";
                             foreach ($row as $key => $value) {
@@ -122,6 +135,7 @@
                             }
                             echo "</tr>";
                         }
+                    }
                     ?>
             
                 </tbody>

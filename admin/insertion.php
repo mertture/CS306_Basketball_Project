@@ -99,7 +99,7 @@
     <br> <br>
     Fill the information to insert into tables.
     <br><br><br>
-    <a href="index.php"> Go to the main page</a> <br><br>
+    <a href="main.php"> Go to the main page</a> <br><br>
 
     <label for="tables">Choose a table to insert:</label>
 </div>

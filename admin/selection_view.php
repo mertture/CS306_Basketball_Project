@@ -82,11 +82,11 @@
 
 
       <!-- MAIN MENU -->
-      <a href="index.php" class=""> Go to the main page</a>
+      <a href="main.php" class=""> Go to the main page</a>
 
       <!-- CONNECTING DATABASE -->
       <?php
-              include "config.php";
+              include "../config.php";
 
               $sql_statement = "SHOW TABLES FROM cs306_basketball_project";
               $result = mysqli_query($db, $sql_statement);
