@@ -21,6 +21,9 @@ $attributes = [
     "l_name" => "Last Name",
     "birth_date" => "Birth Day",
     "height" => "Height",
+    "start_date" => "Start Date",
+    "end_date" => "End Date",
+
 
 
 ];
