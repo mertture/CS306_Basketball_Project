@@ -89,7 +89,7 @@ focus-within {
         <li><a class="active" href="#home">Home</a></li>
         <li><a href="#news">Teams</a></li>
         <li><a href="players.php">Players</a></li>
-        <li><a href="#about">Games</a></li>
+        <li><a href="games.php">Games</a></li>
       </ul>
 
     <div class ="row p-2">

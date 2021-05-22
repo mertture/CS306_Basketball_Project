@@ -21,10 +21,17 @@ $attributes = [
     "l_name" => "Last Name",
     "birth_date" => "Birth Day",
     "height" => "Height",
+    "game_id" => "Game ID",
+    "place" => "Place",
+    "home_score" => "Home Score",
+    "away_score" => "Away Score",
+    "home_id" => "Home ID",
+    "away_id" => "Away ID",
+    "game_date" => "Game Date",
+    "home_name" => "Home Name",
+    "away_name" => "Away Name",
     "start_date" => "Start Date",
-    "end_date" => "End Date",
-
-
+    "end_date" => "End Date"
 
 ];
 
