@@ -181,8 +181,13 @@
                                 if($key!=="game_id")
                                     echo "<td style=\"text-align:center\">".$value."</td>";
                             }
-                            echo "<td style=\"text-align:center\">
-                                <form method=\"POST\" action=\"game.php\"><input name=\"game_id\" value=\"".$row["game_id"]."\"hidden><button class=\"btn btn-primary\">Details</button></form>
+                            echo "
+                            <td style=\"text-align:center\">
+                                <form method=\"POST\" action=\"game.php\">
+                                    <input name=\"game_id\" value=\"".$row["game_id"]."\"hidden></input>
+                                    <button class=\"btn btn-primary\">Details
+                                    </button>
+                                </form>
                             </td>";
                             echo "</tr>";
                         }
