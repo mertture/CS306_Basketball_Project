@@ -42,6 +42,7 @@
             height: 2px;
             background-image: linear-gradient(to right,rgba(0,0,0,0),rgba(0,0,0,.5),rgba(0,0,0,0));
         }
+
     </style>
 </head>
 
@@ -62,16 +63,6 @@
             <li><a href="players.php">Players</a></li>
             <li><a href="games.php" class="active">Games</a></li>
         </ul>
-
-        <div class="row p-2 title">
-            <div class="col-12 mt-2">
-                <h1 class="custom-font-bold text-center mb-0" style = "color:black;">
-                GAME DETAILS
-                </h1>
-            <hr class="section-title">
-        </div>
-    </div>
-
     </br>
 
 
@@ -80,18 +71,18 @@
     <div class="container">
         <div class="row text-center m-0 p-1 align-items-center">
             <?php
-            $game_id = $_POST["team_id"];
-            $sql_statement = "SELECT CONCAT(t1.name,' ',home_score,' - ',away_score,' ',t2.name) AS match_result, place, DATE_FORMAT(game_date, '%d/%m/%Y') as game_date
-                FROM games
-                LEFT JOIN teams AS t1
-                ON home_id = t1.tid
-                LEFT JOIN teams AS t2
-                ON away_id = t2.tid
-                WHERE game_id=$game_id";
-            $result =  mysqli_query($db, $sql_statement);
-            $row = mysqli_fetch_assoc($result);
-            echo "<h1>".$row["match_result"]."</h1>";
-            echo "<h3>".$row["game_date"]." - ".$row["place"]."</h3>";
+            $team_id = $_POST["team_id"];
+            $team_stat_query = "SELECT * FROM team_stats WHERE tid=".$team_id;
+            $team_stats =  mysqli_query($db, $team_stat_query);
+
+            $sql_statement = "SELECT T.name, CONCAT(C.f_name,\" \",C.l_name) as coach_name FROM coaches C LEFT JOIN (teams T JOIN manages M USING (tid)) USING (cid) WHERE tid=1";
+            $team_details =  mysqli_query($db, $sql_statement);
+
+            $row = mysqli_fetch_assoc($team_details);
+
+            echo "<h1 class='text-left' >".$row["name"]."</h1>";
+            echo "<h4 class='text-left' > Coach: <span style='font-weight: 200;'>".$row["coach_name"]."</span></h4>";
+            //echo "<h3>".$row[""]." - ".$row["place"]."</h3>";
             ?>
         </div>
 
@@ -102,23 +93,9 @@
 
         <div class="row text-center m-0 p-1 align-items-center bg-c-league">
             <?php
-                $sql_statement = "SELECT teams.name AS team_name, CONCAT(players.f_name, ' ', players.l_name) as pname, ps.points, ps.assists, ps.rebounds, ps.steals, ps.blocks, ps.mins_played
-                FROM player_stats AS ps
-                LEFT JOIN players ON ps.player_id=players.player_id
-                LEFT JOIN plays_for ON ps.player_id=plays_for.player_id
-                LEFT JOIN teams ON teams.tid=plays_for.tid
-                WHERE game_id=$game_id
-                ORDER BY ps.points DESC";
-
-                $result = mysqli_query($db, $sql_statement);
-
-                if(!$result or mysqli_num_rows($result) === 0) {
-                    echo 'Match not found!';
-                }
-
-                else {
-                    $fieldinfo = $result -> fetch_fields();
-                }
+                $sql_statement = "";
+                $result = mysqli_query($db, $team_stat_query);
+                $fieldinfo = $result -> fetch_fields();
             ?>
 
             <table class="table table-striped">
@@ -145,7 +122,6 @@
                         }
                     }
                     ?>
-
                 </tbody>
             </table>
 

@@ -1,7 +1,6 @@
 <?php
-
 include "../config.php";
-
+include('session.php');    
 // players
 if (isset($_POST['player_id']) and isset($_POST['f_name']) and isset($_POST['l_name']) and isset($_POST['birth_date']) and isset($_POST['height'])) {
 

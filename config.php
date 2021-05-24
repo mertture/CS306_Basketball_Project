@@ -8,6 +8,8 @@ if ($db->connect_errno > 0) {
 
 $attributes = [
     "tid" => "Team ID",
+    "coach_name" => "Coach Name",
+    "total_player" => "Number of Player",
     "player_id" => "Player ID",
     "home_win" => "Home Wins",
     "home_loses" => "Home Loses",

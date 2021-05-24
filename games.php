@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <style> 
+    <style>
         thead {
             border-bottom: 1px solid rgba( 0, 0, 0, 0.30 );
             box-sizing: border-box;
@@ -46,7 +46,7 @@
 </head>
 
 <?php
-  include "config.php";   
+  include "config.php";
 ?>
 
 <body>
@@ -58,7 +58,7 @@
 
         <ul style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
             <li><a href="index.php">Home</a></li>
-            <li><a href="#news">Teams</a></li>
+            <li><a href="teams.php">Teams</a></li>
             <li><a href="players.php">Players</a></li>
             <li><a href="games.php" class="active">Games</a></li>
         </ul>
@@ -66,12 +66,12 @@
         <div class="row p-2 title">
             <div class="col-12 mt-2">
                 <h1 class="custom-font-bold text-center mb-0" style = "color:black;">
-                GAMES                    
+                GAMES
                 </h1>
             <hr class="section-title">
         </div>
     </div>
-    
+
     </br>
 
     <div class="container">
@@ -86,7 +86,7 @@
                             $result = mysqli_query($db, $sql_statement);
                             echo "<option name =\"team_id\" value=\"\" disabled selected></option>";
 
-                            while ($row = mysqli_fetch_assoc($result)) { 
+                            while ($row = mysqli_fetch_assoc($result)) {
                                 echo "<option name =\"team_id\" value=".$row["tid"].">".$row["name"]."</option>";
                             }
 
@@ -110,9 +110,9 @@
                 </div>
             </form>
         </div>
-        
+
         </br>
-        
+
         <hr class="section-title">
 
 
@@ -124,9 +124,9 @@
                 ON home_id = t1.tid
                 LEFT JOIN teams AS t2
                 ON away_id = t2.tid";
-            
+
                 $conditions = array();
-                
+
                 if (isset($_POST['team']) && $_POST['team']!=="") {
                     $team = '"'.$_POST['team'].'"';
                     array_push($conditions, "(t1.tid=$team OR t2.tid=$team)");
@@ -175,7 +175,7 @@
                 <tbody>
                     <?php
                     if($result) {
-                        while ($row = mysqli_fetch_assoc($result)) { 
+                        while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
                             foreach ($row as $key => $value) {
                                 if($key!=="game_id")
@@ -193,7 +193,7 @@
                         }
                     }
                     ?>
-            
+
                 </tbody>
             </table>
         </div>

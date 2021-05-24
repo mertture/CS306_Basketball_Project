@@ -3,7 +3,7 @@
     <head>
         <title></title>
         <link rel="stylesheet" href="styles/selection_view.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <style>
@@ -13,25 +13,25 @@
         .filters{
             margin-top: 30px;
         }
-    
+
         .avatar{
             width: 2em;
             height: 2em;
         }
         .table {
-            text-align: left !important;   
+            text-align: left !important;
             margin-top: 30px;
         }
-        
-        
+
+
     </style>
-    
+
     </head>
 
     <body>
     <ul style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
         <li><a class="active" href="index.php">Home</a></li>
-        <li><a href="#news">Teams</a></li>
+        <li><a href="teams.php">Teams</a></li>
         <li><a href="players.php">Players</a></li>
         <li><a href="games.php">Games</a></li>
       </ul>
@@ -39,9 +39,9 @@
 
         <?php
             include "config.php";
-            $tables = "SELECT P.player_id, P.f_name, P.l_name, P.birth_date, P.height, T.name, PF.start_date, PF.end_date 
+            $tables = "SELECT P.player_id, P.f_name, P.l_name, P.birth_date, P.height, T.name, PF.start_date, PF.end_date
                         from players P LEFT JOIN (teams T JOIN plays_for PF USING (tid)) USING (player_id) ";
-           
+
             $result = mysqli_query($db, $tables);
             $fieldinfo = $result -> fetch_fields();
             $teams_sql =  "SELECT T.name FROM teams T";
@@ -56,7 +56,7 @@
 
                 <div class="col-12 mt-2">
                     <h1 class="custom-font-bold text-center mb-0" style = "color: black;">
-                        PLAYERS                    
+                        PLAYERS
                     </h1>
                     <hr class="section-title">
                 </div>
@@ -68,10 +68,10 @@
                         <label for="team">Filter By Team</label>
                         <select id="team" name="team" class="form-control" onchange="this.form.submit()">
                         <option value="" disabled selected><?php if (isset($_POST['team']) && $_POST['team'] !== ''){$team = $_POST['team']; echo $team; } else { echo 'Choose Team';}?></option>
-                                
+
                             <?php
-                    
-                                while ($row = mysqli_fetch_assoc($teams_result)) { 
+
+                                while ($row = mysqli_fetch_assoc($teams_result)) {
                                     foreach ($row as $key => $value) {
                                         echo "<option value ='$value'> $value </option>" ;
                                     }
@@ -80,7 +80,7 @@
                         </select>
                      </form>
                 </div>
-                    
+
             </div>
 
             <div class="row p-2 text-center m-0 p-1 align-items-center filters">
@@ -92,7 +92,7 @@
                             <?php
                                 foreach ($fieldinfo as $val) {
                                     $tmp = $val -> name;
-                
+
                                     echo "<option value ='$tmp'> $attributes[$tmp] </option>" ;
                                 }
                             ?>
@@ -117,11 +117,11 @@
                         </form>
                     </div>
                 </form>
-                    
+
             </div>
-            
-            
-        
+
+
+
 
             <div class="row text-center m-0 p-1 align-items-center ">
 
@@ -139,34 +139,34 @@
                         $col = $_POST['col'];
                         $min= '"'.$_POST['min'].'"';
                         $max = '"'.$_POST['max'].'"';
-    
+
                         $sql_statement = "$tables AND $col >= $min AND $col <= $max";
                         $result = mysqli_query($db, $sql_statement);
-    
+
                     }
-    
+
                     else if (isset($_POST['col']) && ($_POST['min'] !== '') ) {
                         $col = $_POST['col'];
                         $min= '"'.$_POST['min'].'"';
-    
+
                         $sql_statement = "$tables AND $col >= $min" ;
                         $result = mysqli_query($db, $sql_statement);
-                        
+
                     }
-                    
+
                     else if (isset($_POST['col']) && ($_POST['max'] !== '') ) {
                         $col = $_POST['col'];
                         $max = '"'.$_POST['max'].'"';
-    
+
                         $sql_statement = "$tables AND $col <= $max" ;
                         $result = mysqli_query($db, $sql_statement);
                     }
-                    
-                    
+
+
                     else{
                         $sql_statement = $tables;
                         $result = mysqli_query($db, $sql_statement);
-    
+
                     }
                 }
                 else{
@@ -174,34 +174,34 @@
                         $col = $_POST['col'];
                         $min= '"'.$_POST['min'].'"';
                         $max = '"'.$_POST['max'].'"';
-    
+
                         $sql_statement = "$tables WHERE $col >= $min AND $col <= $max";
                         $result = mysqli_query($db, $sql_statement);
-    
+
                     }
-    
+
                     else if (isset($_POST['col']) && ($_POST['min'] !== '') ) {
                         $col = $_POST['col'];
                         $min= '"'.$_POST['min'].'"';
-    
+
                         $sql_statement = "$tables WHERE $col >= $min" ;
                         $result = mysqli_query($db, $sql_statement);
-                        
+
                     }
-                    
+
                     else if (isset($_POST['col']) && ($_POST['max'] !== '') ) {
                         $col = $_POST['col'];
                         $max = '"'.$_POST['max'].'"';
-    
+
                         $sql_statement = "$tables WHERE $col <= $max" ;
                         $result = mysqli_query($db, $sql_statement);
                     }
-                    
-                    
+
+
                     else{
                         $sql_statement = $tables;
                         $result = mysqli_query($db, $sql_statement);
-    
+
                     }
 
                 }
@@ -211,9 +211,9 @@
                 }
                 else {
                     $fieldinfo = $result -> fetch_fields();
-                    
+
                 }
-                
+
             ?>
 
             <table class="table table-striped">
@@ -229,7 +229,7 @@
                 </thead>
                 <tbody>
                     <?php
-                        while ($row = mysqli_fetch_assoc($result)) { 
+                        while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
                             echo "<td> <img src='./src/avatar.png' alt=' ' class='avatar'></td>";
                             foreach ($row as $key => $value) {
@@ -238,16 +238,16 @@
                             echo "</tr>";
                         }
                     ?>
-                
-                
+
+
                 </tbody>
             </table>
-                
+
             </div>
 
-        
+
         </div>
 
-            
+
     </body>
 </html>

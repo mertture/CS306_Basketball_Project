@@ -1,5 +1,6 @@
-
-
+<?php
+   include('session.php');
+?>
 <html>
     <head>
         <title></title>
