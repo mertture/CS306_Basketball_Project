@@ -66,49 +66,33 @@
         <div class="row p-2 title">
             <div class="col-12 mt-2">
                 <h1 class="custom-font-bold text-center mb-0" style = "color:black;">
-                GAMES                    
+                GAME DETAILS
                 </h1>
             <hr class="section-title">
         </div>
     </div>
     
     </br>
+    
+    
+
 
     <div class="container">
-        <div class="row text-center m-0 p-1 align-items-center filters">
-            <form action='games.php' method='POST'>
-                <div class="form-row">
-                    <div class="form-group col-sm-4">
-                        <label for="col">Select Team</label>
-                        <select id="team" name="team" class="form-control">
-                            <?php
-                            $sql_statement = "SELECT * FROM teams";
-                            $result = mysqli_query($db, $sql_statement);
-                            echo "<option name =\"team_id\" value=\"\" disabled selected></option>";
-
-                            while ($row = mysqli_fetch_assoc($result)) { 
-                                echo "<option name =\"team_id\" value=".$row["tid"].">".$row["name"]."</option>";
-                            }
-
-                            ?>
-                        </select>
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label for="start">Games Since</label>
-                        <input type="date" class="form-control" id="start_date" name="start_date">
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label for="end">Games Till</label>
-                        <input type="date" class="form-control" id="end_date" name="end_date">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <button type="submit" class="btn btn-primary" style="margin-right:19px">Filter</button>
-                    <form action='games.php' method='POST'>
-                        <button type="submit" class="btn btn-primary">Clear Filters</button>
-                    </form>
-                </div>
-            </form>
+        <div class="row text-center m-0 p-1 align-items-center">
+            <?php
+            $game_id = $_POST["game_id"];
+            $sql_statement = "SELECT CONCAT(t1.name,' ',home_score,' - ',away_score,' ',t2.name) AS match_result, place, DATE_FORMAT(game_date, '%d/%m/%Y') as game_date
+                FROM games
+                LEFT JOIN teams AS t1
+                ON home_id = t1.tid
+                LEFT JOIN teams AS t2
+                ON away_id = t2.tid
+                WHERE game_id=$game_id";
+            $result =  mysqli_query($db, $sql_statement);
+            $row = mysqli_fetch_assoc($result);
+            echo "<h1>".$row["match_result"]."</h1>";
+            echo "<h3>".$row["game_date"]." - ".$row["place"]."</h3>";
+            ?>
         </div>
         
         </br>
@@ -118,56 +102,33 @@
 
         <div class="row text-center m-0 p-1 align-items-center bg-c-league">
             <?php
-                $sql_statement = "SELECT game_id, game_date, CONCAT(t1.name,' ',home_score,' - ',away_score,' ',t2.name) AS match_result, place
-                FROM games
-                LEFT JOIN teams AS t1
-                ON home_id = t1.tid
-                LEFT JOIN teams AS t2
-                ON away_id = t2.tid";
-            
-                $conditions = array();
+                $sql_statement = "SELECT teams.name AS team_name, CONCAT(players.f_name, ' ', players.l_name) as pname, ps.points, ps.assists, ps.rebounds, ps.steals, ps.blocks, ps.mins_played
+                FROM player_stats AS ps
+                LEFT JOIN players ON ps.player_id=players.player_id
+                LEFT JOIN plays_for ON ps.player_id=plays_for.player_id
+                LEFT JOIN teams ON teams.tid=plays_for.tid
+                WHERE game_id=$game_id
+                ORDER BY ps.points DESC";                
                 
-                if (isset($_POST['team']) && $_POST['team']!=="") {
-                    $team = '"'.$_POST['team'].'"';
-                    array_push($conditions, "(t1.tid=$team OR t2.tid=$team)");
-                }
-                if (isset($_POST['start_date']) && $_POST['start_date']!=="") {
-                    $start_date = '"'.$_POST['start_date'].'"';
-                    array_push($conditions, "(game_date >= $start_date)");
-                }
-                if (isset($_POST['end_date']) && $_POST['end_date']!=="") {
-                    $end_date = '"'.$_POST['end_date'].'"';
-                    array_push($conditions, "(game_date <= $end_date)");
-                }
-
-                if(count($conditions)!==0) {
-                    $where = " WHERE ".implode(" AND ", $conditions);
-                    $sql_statement = $sql_statement.$where;
-                }
-                $sql_statement = $sql_statement." ORDER BY games.game_date DESC";
                 $result = mysqli_query($db, $sql_statement);
 
-
                 if(!$result or mysqli_num_rows($result) === 0) {
-                    echo 'No matches found!';
+                    echo 'Match not found!';
                 }
 
                 else {
                     $fieldinfo = $result -> fetch_fields();
                 }
             ?>
-
-
+    
             <table class="table table-striped">
                 <thead>
                     <tr>
                     <?php
                     if(isset($fieldinfo)) {
                         foreach ($fieldinfo as $val) {
-                            if($val->name !== "game_id")
-                                echo "<th style=\"text-align:center\">".$attributes[$val -> name]." </th>";
+                            echo "<th style=\"text-align:center\">".$attributes[$val -> name]." </th>";
                         }
-                        echo "<th></th>";
                     }
                     ?>
                     </tr>
@@ -178,19 +139,16 @@
                         while ($row = mysqli_fetch_assoc($result)) { 
                             echo "<tr>";
                             foreach ($row as $key => $value) {
-                                if($key!=="game_id")
-                                    echo "<td style=\"text-align:center\">".$value."</td>";
+                                echo "<td style=\"text-align:center\">".$value."</td>";
                             }
-                            echo "<td style=\"text-align:center\">
-                                <form method=\"POST\" action=\"game.php\"><input name=\"game_id\" value=\"".$row["game_id"]."\"hidden><button class=\"btn btn-primary\">Details</button></form>
-                            </td>";
                             echo "</tr>";
                         }
                     }
                     ?>
             
                 </tbody>
-            </table>
+            </table>            
+
         </div>
     </div>
 </body>

@@ -31,7 +31,16 @@ $attributes = [
     "home_name" => "Home Name",
     "away_name" => "Away Name",
     "start_date" => "Start Date",
-    "end_date" => "End Date"
+    "end_date" => "End Date",
+    "match_result" => "Result",
+    "rebounds" => "Rebounds",
+    "points" => "Points",
+    "mins_played" => "Mins Played",
+    "assists" => "Assists",
+    "blocks" => "Blocks",
+    "steals" => "Steals",
+    "team_name" => "Team",
+    "pname" => "Name"
 
 ];
 
