@@ -28,7 +28,7 @@
 
     </head>
 
-    <body>
+    <body style = "background-color: #f6f6f6">
     <ul style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
         <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
         <li><img src="src/logoBlack.jpg" height = "50">&nbsp;&nbsp;</li>
@@ -219,7 +219,7 @@
 
             ?>
 
-            <table class="table table-striped">
+            <table class="table table-striped" style ="box-shadow: 0 0 10px 0 rgb(208 208 208 / 50%);">
                 <thead>
                     <tr>
                     <th scope='col'> </td>

@@ -96,7 +96,7 @@ focus-within {
 </style>
 </head>
 
-<body>
+<body style = "background-color: #f6f6f6">
   <div class="dashboard" style = "padding-top: -6vh;"  align="center">
   
     
@@ -164,7 +164,7 @@ focus-within {
         $fieldinfo = $result -> fetch_fields();
         //style="width:' .(count($fieldinfo) * 7).'vw"
 
-        echo '<table class = "table table-striped"> ';
+        echo '<table class = "table table-striped" style ="box-shadow: 0 0 10px 0 rgb(208 208 208 / 50%); border-radius: 0.6rem;"> ';
         echo "<thead id ='teams_h_id'>";
         foreach ($fieldinfo as $val) {
           if ($val->name != "tid") {

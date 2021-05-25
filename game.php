@@ -49,7 +49,7 @@
   include "config.php";
 ?>
 
-<body>
+<body style = "background-color: #f6f6f6">
     <!-- <div class="dashboard">
         <div class="header">
            
@@ -123,7 +123,7 @@
                 }
             ?>
 
-            <table class="table table-striped">
+            <table class="table table-striped" style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
                 <thead>
                     <tr>
                     <?php

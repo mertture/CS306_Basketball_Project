@@ -50,7 +50,7 @@
   include "config.php";
 ?>
 
-<body>
+<body style = "background-color: #f6f6f6">
     <!--<div class="dashboard">
         <div class="header">
            
@@ -100,7 +100,7 @@
                 $fieldinfo = $result -> fetch_fields();
             ?>
 
-            <table class="table table-striped">
+            <table class="table table-striped" style ="box-shadow: 0 0 10px 0 rgb(208 208 208 / 50%);">
                 <thead>
                     <tr>
                     <?php

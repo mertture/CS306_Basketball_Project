@@ -87,7 +87,7 @@ focus-within {
 </style>
 </head>
 
-<body align = "center">
+<body align = "center" style = "background-color: #f6f6f6">
   <!--<div class="dashboard" align="center">
     <div class="header">
 
@@ -154,7 +154,7 @@ focus-within {
 
         ?>
 
-        <table class="table table-striped">
+        <table class="table table-striped" style ="box-shadow: 0 0 10px 0 rgb(208 208 208 / 50%); border-radius: 0.6rem;">
             <thead>
                 <tr>
                 <?php
