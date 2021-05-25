@@ -3,7 +3,7 @@
 
 <head>
 <title> Basketball League Database Application </title>
-
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏀</text></svg>">
 <link rel="stylesheet" href="styles/selection_view.css">
 <!-- BOOTSTRAP CSS -->
 
@@ -74,16 +74,38 @@ focus-within {
   background: #f2f3ff;
   outline: none;
 }
+
+.season_filter{
+    margin-bottom: 30px;
+}
+.filters{
+    margin-top: 30px;
+}
+
+.avatar{
+    width: 2em;
+    height: 2em;
+}
+.table {
+    text-align: left !important;
+    margin-top: 30px;
+}
+
+
+
 </style>
 </head>
 
 <body>
-  <div class="dashboard" align="center">
+  <div class="dashboard" style = "padding-top: -6vh;"  align="center">
+  
+    
     <div class="header">
+    
+    <img src="src/logo.jpg" align = "left" style= "padding-left: 60px; margin-right: -140px;";  height = "75">
+      <h1 class="title"  align = "middle"> Basketball App </h1>
 
-    <!-- TITLE -->
-      <h1 class="title"> Basketball App </h1>
-
+      
     </div>
       <ul style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
         <li><a class="active" href="#home">Home</a></li>
@@ -91,7 +113,7 @@ focus-within {
         <li><a href="players.php">Players</a></li>
         <li><a href="games.php">Games</a></li>
       </ul>
-
+  
     <div class ="row p-2">
       <div class ="col-12 mt2">
           <h1> TEAM STANDINGS </h1>
@@ -100,24 +122,56 @@ focus-within {
           </hr>
       </div>
     </div>
+    <div class = "container">
+    <?php
+            include "config.php";
+            $seasons_sql =  "SELECT S.s_year FROM seasons S";
+            $seasons_result = mysqli_query($db,$seasons_sql);
+            $season = "";
+        ?>
 
+    <div class="row text-center m-0 p-1 align-items-center filters">
+        <div class="form-row">
+            <form action='index.php' method='POST'>
+                <div class="form-group col-12">
+                <label for="season">Filter By Season Year</label>
+                <select id="season" name="season" class="form-control" onchange="this.form.submit()">
+                <option value="" disabled selected><?php if (isset($_POST['season']) && $_POST['season'] !== ''){$season = $_POST['season']; echo $season; } else { echo 'Choose Season';}?></option>
 
+                    <?php
 
-    <div class = "col-12">
+                        while ($row = mysqli_fetch_assoc($seasons_result)) {
+                            foreach ($row as $key => $value) {
+                                echo "<option value ='$value'> $value </option>" ;
+                            }
+                        }
+                    ?>
+                </select>
+              </form>
+        </div>
+
+    </div>
+    <div class="row text-center m-0 p-1 align-items-center bg-c-league">
+    <!-- <div class = "col-12"> -->
           <?php
         include 'config.php';
-        $sql_statement = "SELECT * FROM team_stats ORDER BY standing";
+        $season_year = 2020;
+        if (isset($_POST['season']) && $_POST['season']!=="") {
+          $season_year = $_POST['season'];
+        }
+        $sql_statement = "SELECT * FROM team_stats WHERE team_stats.s_year = $season_year ORDER BY standing";
         $result = mysqli_query($db, $sql_statement);
         $fieldinfo = $result -> fetch_fields();
+        //style="width:' .(count($fieldinfo) * 7).'vw"
 
-        echo '<table class = "table-striped" style="width:' .(count($fieldinfo) * 10).'vw"> ';
+        echo '<table class = "table table-striped"> ';
         echo "<thead id ='teams_h_id'>";
         foreach ($fieldinfo as $val) {
           if ($val->name != "tid") {
-            echo "<td> ".$attributes[$val -> name]. "</td>";
+            echo "<td style=\"text-align:center\"> ".$attributes[$val -> name]. "</td>";
           }
           if ($val->name == "tid") {
-            echo "<td> "."Team". "</td>";
+            echo "<td style=\"text-align:center\"> "."Team". "</td>";
           }
         }
         echo "<td >"."Points"."</td>";
@@ -167,6 +221,6 @@ focus-within {
 
 
 
-
+  </div>
 </body>
 </html>

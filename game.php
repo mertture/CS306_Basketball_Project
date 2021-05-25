@@ -50,13 +50,15 @@
 ?>
 
 <body>
-    <div class="dashboard">
+    <!-- <div class="dashboard">
         <div class="header">
-            <!-- TITLE -->
+           
             <h1 class="title text-center"> Basketball App </h1>
-        </div>
+        </div> -->
 
         <ul style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li><img src="src/logoBlack.jpg" height = "50">&nbsp;&nbsp;</li>
             <li><a href="index.php">Home</a></li>
             <li><a href="teams.php">Teams</a></li>
             <li><a href="players.php">Players</a></li>
@@ -80,7 +82,7 @@
     <div class="container">
         <div class="row text-center m-0 p-1 align-items-center">
             <?php
-            $game_id = $_POST["team_id"];
+            $game_id = $_POST["game_id"];
             $sql_statement = "SELECT CONCAT(t1.name,' ',home_score,' - ',away_score,' ',t2.name) AS match_result, place, DATE_FORMAT(game_date, '%d/%m/%Y') as game_date
                 FROM games
                 LEFT JOIN teams AS t1

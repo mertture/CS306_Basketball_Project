@@ -87,22 +87,25 @@ focus-within {
 </style>
 </head>
 
-<body>
-  <div class="dashboard" align="center">
+<body align = "center">
+  <!--<div class="dashboard" align="center">
     <div class="header">
 
-    <!-- TITLE -->
+    
       <h1 class="title"> Basketball App </h1>
 
-    </div>
+    </div>-->
       <ul style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        <li><img src="src/logoBlack.jpg" height = "50">&nbsp;&nbsp;</li>
         <li><a href="index.php">Home</a></li>
         <li><a class="active" href="teams.php">Teams</a></li>
         <li><a href="players.php">Players</a></li>
         <li><a href="games.php">Games</a></li>
       </ul>
 
-    <div class ="row p-2">
+      <div class = "container">
+    <div class ="row p-2" >
       <div class ="col-12 mt2">
           <h1> TEAMS </h1>
           <hr class ="section-title">
@@ -117,7 +120,7 @@ focus-within {
           <?php
         include 'config.php';
         $sql_statement = "SELECT T.tid, T.name, CONCAT(C.f_name,\" \",C.l_name) as coach_name FROM coaches C LEFT JOIN (teams T JOIN manages M USING (tid)) USING (cid)";
-        $calculate_total_player = "select t.tid, count(*) as total_player from teams t left join plays_for pf on t.tid = pf.tid group by t.name, t.tid";
+        $calculate_total_player = "SELECT T.tid, count(*) as total_player from teams T left join plays_for PF on T.tid = PF.tid group by T.name, T.tid";
         // $total_stats = "select ts.tid, count(*) as total_season, SUM(home_win + away_win) as total_win, SUM(away_win + away_loses) as total_loss from Team_stats ts group by ts.tid";
 
         $result = mysqli_query($db, $sql_statement);
@@ -172,7 +175,7 @@ focus-within {
                       $query = "SELECT * FROM ( SELECT T.tid, T.name, CONCAT(C.f_name,\" \",C.l_name) as coach_name FROM coaches C LEFT JOIN (teams T JOIN manages M USING (tid)) USING (cid)) as T WHERE CONCAT(T.tid, T.name, T.coach_name) LIKE '%".$filterValue."%'";
                       $result = mysqli_query($db, $query);
 
-                      if($result or mysqli_num_rows($result) === 0) {
+                      if($result and mysqli_num_rows($result) != 0) {
                           while ($row = mysqli_fetch_row($result)) {
                               echo "<tr>";
                               echo "<td style=\"text-align:center\">".$row[0]."</td>";
@@ -197,7 +200,8 @@ focus-within {
                           echo "<td style=\"text-align:center\">".$row[0]."</td>";
                           echo "<td style=\"text-align:center\">".$row[1]."</td>";
                           echo "<td style=\"text-align:center\">".$row[2]."</td>";
-                          echo "<td style=\"text-align:center\">".$total_players[$row[0]]."</td>";
+                          if (array_key_exists($row[0], $total_players)) {echo "<td style=\"text-align:center\">".$total_players[$row[0]]."</td>";}
+                          else {echo "<td style=\"text-align:center\">0</td>";}
                           echo "
                           <td style=\"text-align:center\">
                               <form method=\"POST\" action=\"team.php\">
@@ -214,6 +218,7 @@ focus-within {
             </tbody>
         </table>
     </div>
+  </div>
   </div>
 </body>
 </html>

@@ -30,10 +30,13 @@
 
     <body>
     <ul style ="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        <li><img src="src/logoBlack.jpg" height = "50">&nbsp;&nbsp;</li>
         <li><a class="active" href="index.php">Home</a></li>
         <li><a href="teams.php">Teams</a></li>
         <li><a href="players.php">Players</a></li>
         <li><a href="games.php">Games</a></li>
+        
       </ul>
 
 
