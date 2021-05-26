@@ -120,9 +120,9 @@ focus-within {
           <?php
         include 'config.php';
         $sql_statement = "SELECT T.tid, T.name, CONCAT(C.f_name,\" \",C.l_name) as coach_name FROM coaches C LEFT JOIN (teams T JOIN manages M USING (tid)) USING (cid)";
-        $calculate_total_player = "SELECT T.tid, count(*) as total_player from teams T left join plays_for PF on T.tid = PF.tid group by T.name, T.tid";
+        $calculate_total_player = "SELECT PF.tid, T.tid, count(*) as total_player from teams T left join plays_for PF on T.tid = PF.tid group by T.name, T.tid";
         // $total_stats = "select ts.tid, count(*) as total_season, SUM(home_win + away_win) as total_win, SUM(away_win + away_loses) as total_loss from Team_stats ts group by ts.tid";
-
+        
         $result = mysqli_query($db, $sql_statement);
         $total_player_table = mysqli_query($db, $calculate_total_player);
 
@@ -131,7 +131,10 @@ focus-within {
 
         $total_players = array();
         while ($row_user = $total_player_table->fetch_array()) {
-            $total_players[$row_user[0]] = $row_user[1];
+            if ($row_user[0] != null) {
+            $total_players[$row_user[1]] = $row_user[2];
+            }
+            else {$total_players[$row_user[1]] = 0;}
         }
 
         // FILTER BY
@@ -195,13 +198,16 @@ focus-within {
                       }
                   } else {
                       if($result) {
+                        
                       while ($row = mysqli_fetch_row($result)) {
+                        
                           echo "<tr>";
                           echo "<td style=\"text-align:center\">".$row[0]."</td>";
                           echo "<td style=\"text-align:center\">".$row[1]."</td>";
                           echo "<td style=\"text-align:center\">".$row[2]."</td>";
                           if (array_key_exists($row[0], $total_players)) {echo "<td style=\"text-align:center\">".$total_players[$row[0]]."</td>";}
-                          else {echo "<td style=\"text-align:center\">0</td>";}
+                          
+                         
                           echo "
                           <td style=\"text-align:center\">
                               <form method=\"POST\" action=\"team.php\">

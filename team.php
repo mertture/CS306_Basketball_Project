@@ -76,10 +76,10 @@
             $team_id = $_POST["team_id"];
             $team_stat_query = "SELECT * FROM team_stats WHERE tid=".$team_id;
             $team_stats =  mysqli_query($db, $team_stat_query);
-
-            $sql_statement = "SELECT T.name, CONCAT(C.f_name,\" \",C.l_name) as coach_name FROM coaches C LEFT JOIN (teams T JOIN manages M USING (tid)) USING (cid) WHERE tid=1";
+            
+            $sql_statement = "SELECT T.name, CONCAT(C.f_name,\" \",C.l_name) as coach_name FROM coaches C LEFT JOIN (teams T JOIN manages M USING (tid)) USING (cid) WHERE tid=$team_id";
             $team_details =  mysqli_query($db, $sql_statement);
-
+            
             $row = mysqli_fetch_assoc($team_details);
 
             echo "<h1 class='text-left' >".$row["name"]."</h1>";
