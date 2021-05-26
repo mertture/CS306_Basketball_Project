@@ -93,10 +93,13 @@ focus-within {
 
 
 
+
+
+
 </style>
 </head>
-
-<body style = "background-color: #f6f6f6">
+<!-- #e8e7e7 #f6f6f6-->
+<body style = "background-color: #e8e7e7;">
   <div class="dashboard" align="center">
   
     
