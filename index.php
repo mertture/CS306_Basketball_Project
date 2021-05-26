@@ -97,7 +97,7 @@ focus-within {
 </head>
 
 <body style = "background-color: #f6f6f6">
-  <div class="dashboard" style = "padding-top: -6vh;"  align="center">
+  <div class="dashboard" align="center">
   
     
     <div class="header">
